@@ -1,9 +1,12 @@
 package app.com.example.android.popularmovies;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -36,25 +40,37 @@ public class MainActivityFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        updateMovies();
+        super.onStart();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_main, container, false);
-        gridViewAdapter = new GridViewAdapter(getActivity(), R.layout.grid_view_items, new ArrayList<MovieDetails>());
+        final ArrayList<MovieDetails> mArr = new ArrayList<MovieDetails>();
+        gridViewAdapter = new GridViewAdapter(getActivity(), R.layout.grid_view_items, mArr);
         GridView gridView = (GridView) rootview.findViewById(R.id.grid_view);
 
-        FetchMovieContent fetchMovieContent = new FetchMovieContent();
-        fetchMovieContent.execute();
+        updateMovies();
         gridView.setAdapter(gridViewAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra("movies_details", mArr.get(position));
                 startActivity(intent);
             }
         });
+
         return rootview;
     }
-
+    public void updateMovies(){
+        FetchMovieContent fetchMovieContent = new FetchMovieContent();
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String order = pref.getString(getString(R.string.sort_key), getString(R.string.sort_default));
+        fetchMovieContent.execute(order);
+    }
 
     class FetchMovieContent extends AsyncTask<String, Void, ArrayList<MovieDetails>>{
 
@@ -71,7 +87,7 @@ public class MainActivityFragment extends Fragment {
 
             try {
                 final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
-                final String SORT_ORDER = "popular";
+                final String SORT_ORDER = params[0];
                 final String APPID_PARAM = "api_key";
 
                 Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
