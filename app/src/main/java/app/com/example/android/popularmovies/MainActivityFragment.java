@@ -2,6 +2,7 @@ package app.com.example.android.popularmovies;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -52,7 +53,10 @@ public class MainActivityFragment extends Fragment {
         final ArrayList<MovieDetails> mArr = new ArrayList<MovieDetails>();
         gridViewAdapter = new GridViewAdapter(getActivity(), R.layout.grid_view_items, mArr);
         GridView gridView = (GridView) rootview.findViewById(R.id.grid_view);
-
+        int orientation=this.getResources().getConfiguration().orientation;
+        if(orientation== Configuration.ORIENTATION_LANDSCAPE){
+            gridView.setNumColumns(4);
+        }
         updateMovies();
         gridView.setAdapter(gridViewAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

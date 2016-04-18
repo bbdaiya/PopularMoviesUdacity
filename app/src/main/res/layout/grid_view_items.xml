@@ -6,13 +6,10 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello"/>
+        android:scaleType="centerCrop"/>
+
 
 </LinearLayout>
