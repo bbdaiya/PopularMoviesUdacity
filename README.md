@@ -1,3 +1,3 @@
 # PopularMoviesUdacity
-Udacity Android Nanodegree Project
+Udacity Android Nanodegree Project.
 Add the MovieDB API to build.gradle.app
