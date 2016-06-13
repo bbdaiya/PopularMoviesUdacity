@@ -18,7 +18,7 @@ android {
         }
     }
     buildTypes.each {
-        it.buildConfigField 'String', 'MOVIEDB_API_KEY', 'MovieDB API'
+        it.buildConfigField 'String', 'MOVIEDB_API_KEY', "\"movieDb api key\""
     }
 }
 
@@ -36,4 +36,6 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.android.support:cardview-v7:21.0.+'
+    compile 'com.android.support:recyclerview-v7:21.0.+'
 }

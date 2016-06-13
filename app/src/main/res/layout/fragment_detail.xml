@@ -9,6 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/poster_image_view"
         android:layout_alignParentLeft="true"
+        android:padding="25dp"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="8dp"
         android:layout_below="@id/movie_title_text_view"/>
@@ -54,6 +57,12 @@
             android:text="Rating"
             android:textSize="16dp"
             android:id="@+id/rating_text_view"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/favorite_button"
+            android:layout_marginTop="8dp"
+            android:clickable="true"/>
 
     </LinearLayout>
         <TextView
@@ -67,15 +76,75 @@
             android:layout_below="@id/poster_image_view"
             android:layout_marginLeft="8dp"
             />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/overview_text_view"
-        android:layout_marginTop="16dp"
-        android:textSize="16dp"
-        android:text="overview"
-        android:layout_below="@id/overview_heading"
-        android:layout_marginLeft="8dp"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/overview_text_view"
+            android:layout_marginTop="16dp"
+            android:textSize="16dp"
+            android:text="overview"
+            android:layout_below="@id/overview_heading"
+            android:layout_marginLeft="8dp"
+            />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/overview_text_view"
+                android:id="@+id/trailer_card_view"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Trailers"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_marginLeft="8dp"
+
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/trailer_recycler_view"
+                    android:layout_marginTop="8dp"
+
+
+                    ></android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/trailer_card_view"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Reviews"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginLeft="8dp"
+
+                />
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/review_list_view"
+                android:layout_marginLeft="8dp"
+
+                >
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 </ScrollView>

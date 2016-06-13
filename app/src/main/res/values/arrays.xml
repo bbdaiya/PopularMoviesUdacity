@@ -8,4 +8,9 @@
         <item>popular</item>
         <item>top_rated</item>
     </array>
+    <array name="trailer_list">
+        <item>Trailer 1</item>
+        <item>Trailer 2</item>
+        <item>Trailer 3</item>
+    </array>
 </resources>
